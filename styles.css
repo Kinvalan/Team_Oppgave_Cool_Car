@@ -1,12 +1,10 @@
-#coolness-bar{
-    width: 50%;
-    background-color: lightgray;
-}
+
 
 #inner-coolness-bar{
     width: 1%;
     height: 30px;
     background-color: blue;
+    
 }
 
 #fuel-bar{
@@ -20,7 +18,45 @@
     background-color: brown;
 }
 
+#app{
+    height: 500px;
+    width: 750px;
+    border: 2px solid black;
+   
+   margin: 5px;
+   display: grid;
+   /*grid-template-columns: 1fr 1fr;
+   grid-template-rows: 1fr 1fr 1fr;
+   grid-template-areas: 'output buttons'
+                        'carList images'
+                        'bars bars';*/
+}
 
+button{
+    background-color: rgb(66, 66, 117);
+    color: white;
+    font-size: 12px;
+    line-height: 15px;
+    padding: 8px;
+    font-family: initial;
+    box-shadow:  5px 5px 14px 1px black;
+}
+/*
+div.bars{
+    grid-area: bars;
+}
+div.carList{
+    grid-area: carList;
+}
+div.outputImage{
+    grid-area: images;
+}
+div.buttons{
+    grid-area: buttons;
+}
+div.output{
+    grid-area: output;
+}*/
 
 
 

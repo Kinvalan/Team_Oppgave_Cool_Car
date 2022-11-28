@@ -22,8 +22,28 @@ let car = {name: 'BMW', driveable: true, fuelLeft: 100, items: [], coolness: fun
 
 }};
 
+let items = [
+    {name: 'Delvis brukt dieseltank', coolness: -15, fuel: 30},
+    {name: 'Brukt kebab', coolness: -20},
+    {name: 'Bulk i panser', coolness: -40},
+    {name: 'Våte sokker', coolness: -25},
+    {name: 'Grus', coolness: -15},
+    {name: 'Ripe i lakken', coolness: -25},
+    {name: 'Coca cola flaske', coolness: -5},
+    {name: 'Big mac meny', coolness: -10},
+    {name: 'Gullkjede', coolness: 15},
+    {name: 'Rolex', coolness: 30},
+    {name: 'Gavekort til diesel 500kr', coolness: -5, fuel: 50, image: 'images/gavekortHalv.png'},
+    {name: 'Gavekort til diesel 1000kr', coolness: -5, fuel: 100, image: 'images/gavekortFull.png'},
+    {name: 'Fartsstriper', coolness: 15},
+    {name: 'Wunderbaum', coolness: 20},
+    {name: 'Fete felger', coolness: 30}
+    
+    
+];
 
-//bare en tanke, slå sammen disse arrayene??
+
+/*
 let items = [
     {name: 'Brukt Oljetank', coolness: -15, fuel: 50},
     {name: 'Brukt kebab', coolness: -20},
@@ -38,7 +58,7 @@ let items = [
     {name: 'Gavekort til diesel', coolness: 15, fuel: 45}
     
     
-];
+];*/
 /*
 let positiveItems = [
     {name: 'Coca cola flaske', coolness: 15},
@@ -67,17 +87,17 @@ Noen ganger møter man også på en kompis langs veien - han må du hilse på f�
 
 function getGreetingFromFriend(){
     if(car.coolness() < 30){
-            document.getElementById('output').innerHTML = "Lite kul hilsen";
+            document.getElementById('output').innerHTML = "Lite kul hilsen. Du kan nå kjøre";
             car.driveable = true;
             return "Lite kul hilsen";
     }
     else if(car.coolness() < 60){
-            document.getElementById('output').innerHTML = "Litt kul hilsen";
+            document.getElementById('output').innerHTML = "Litt kul hilsen. Du kan nå kjøre";
             car.driveable = true;
             return "Litt kul hilsen";
     }
     else{
-            document.getElementById('output').innerHTML = "Skikkelig kul hilsen";
+            document.getElementById('output').innerHTML = "Skikkelig kul hilsen. Du kan nå kjøre";
             car.driveable = true;
             return "Skikkelig kul hilsen";
             
@@ -148,12 +168,16 @@ function setRequiredGreeting(){
 
 function greet(greetNumber){
     if(greetNumber == requiredGreeting){
-        document.getElementById('output').innerHTML = 'Your greeting was corrext!: ';
+        document.getElementById('output').innerHTML = 'Your greeting was correct!: ';
         setTimeout(getGreetingFromFriend, 2000);
         
     }
     else{
-        document.getElementById('output').innerHTML = 'You have to greet again!: ';
+        document.getElementById('output').innerHTML = 'Your have to greet again! <br />';
+        document.getElementById('output').innerHTML += 'Du mister bensin mens bilen går på tomgang';
+        car.fuelLeft -= 5;
+        updateFuelBar();
+        checkIfHasWonOrNoFuelLeft();
     }
 
 
@@ -175,8 +199,21 @@ function meetItem(){
     itemIndex = getRandomNumber(0, (items.length-1));
     document.getElementById('output').innerHTML = 'You have encountered an item: ' +
                                                     items[itemIndex].name;
+    setImage();                                                 
 
 
+
+}
+
+function setImage(){
+    if(items[itemIndex].image){
+        document.getElementById('itemImage').src = items[itemIndex].image;
+    }   
+
+}
+
+function removeImage(){
+    document.getElementById('itemImage').src = '';
 
 }
 /*
@@ -199,6 +236,7 @@ function equip(){
     showCarList();
     car.driveable = true;
     checkIfHasWonOrNoFuelLeft();
+    removeImage();
 
 }
 
@@ -206,6 +244,7 @@ function ignore(){
 
     car.driveable = true;
     itemIndex = undefined;
+    removeImage();
 
 }
 
@@ -278,7 +317,7 @@ function updateCoolnessBar(){
         width = 0;
 
     }
-    innerBarDiv.style.width = width + '%';//width * 0.5??
+    innerBarDiv.style.width = width + '%';
     innerBarDiv.innerHTML = width + '%';
 
 }
